@@ -1,11 +1,4 @@
-App = Ember.Application.create();
+'use strict';
 
-App.Router.map(function() {
-  // put your routes here
-});
+window.App = Ember.Application.create();
 
-App.IndexRoute = Ember.Route.extend({
-  model: function() {
-    return ['red', 'yellow', 'blue'];
-  }
-});
