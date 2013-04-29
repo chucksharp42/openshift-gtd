@@ -1,0 +1,19 @@
+#!/bin/bash
+ 
+# We don't need qa tools here
+#pear uninstall pear.phpqatools.org/phpqatools pear.phpunit.de/PHPUnit pear.phpunit.de/PHPUnit_SkeletonGenerator pear.pdepend.org/PHP_Depend pear.phpmd.org/PHP_PMD pear.phpunit.de/phpcpd pear.phpunit.de/phploc pear.phpqatools.org/PHP_CodeBrowser pear.php.net/PHP_CodeSniffer pear.phpunit.de/File_Iterator pear.phpunit.de/FinderFacade pear.phpunit.de/PHPUnit_MockObject pear.phpunit.de/PHP_CodeCoverage pear.phpunit.de/PHP_Timer pear.phpunit.de/PHP_TokenStream pear.phpunit.de/Text_Template
+ 
+# Create cache dir if needed
+if [ ! -d $OPENSHIFT_REPO_DIR/app/cache ]; then
+    mkdir $OPENSHIFT_REPO_DIR/app/cache
+fi
+chmod -Rv 777 $OPENSHIFT_REPO_DIR/app/cache
+ 
+# Create logs dir if needed
+if [ ! -d $OPENSHIFT_REPO_DIR/app/logs ]; then
+    mkdir $OPENSHIFT_REPO_DIR/app/logs
+fi
+chmod -Rv 777 $OPENSHIFT_REPO_DIR/app/logs
+
+# composer!
+( unset GIT_DIR ; cd $OPENSHIFT_REPO_DIR ; /usr/bin/php composer.phar install )
