@@ -1,0 +1,4 @@
+gtd:
+    resource: "@GtdBundle/Resources/config/routing.yml"
+    prefix:   /
+

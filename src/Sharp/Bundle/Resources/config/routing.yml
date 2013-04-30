@@ -1,0 +1,18 @@
+sharp_gtd_homepage:
+    pattern:  /
+    defaults: { _controller: GtdBundle:Default:index }
+    requirements:
+        _method: GET
+
+sharp_gtd_task_all:
+    pattern: /tasks
+    defaults: { _controller: GtdBundle:Task:all, _format: ~ }
+    requirements:
+        _method: GET
+
+sharp_gtd_task_all:
+    pattern: /tasks/{id}
+    defaults: { _controller: GtdBundle:Task:get, _format: ~ }
+    requirements:
+        _method: GET
+        _id: "\d+"
