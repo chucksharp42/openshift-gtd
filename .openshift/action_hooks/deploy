@@ -7,13 +7,21 @@
 if [ ! -d $OPENSHIFT_REPO_DIR/app/cache ]; then
     mkdir $OPENSHIFT_REPO_DIR/app/cache
 fi
-chmod -Rv 777 $OPENSHIFT_REPO_DIR/app/cache
  
 # Create logs dir if needed
 if [ ! -d $OPENSHIFT_REPO_DIR/app/logs ]; then
     mkdir $OPENSHIFT_REPO_DIR/app/logs
 fi
-chmod -Rv 777 $OPENSHIFT_REPO_DIR/app/logs
 
-# composer!
-( unset GIT_DIR ; cd $OPENSHIFT_REPO_DIR ; /usr/bin/php tools/composer install )
+# Run stuff without really unsetting GIT_DIR
+(
+  unset GIT_DIR 
+  cd $OPENSHIFT_REPO_DIR 
+  # composer!
+  /usr/bin/php tools/composer install 
+
+  # clear cache
+  /usr/bin/php app/console cache:clear
+  chmod -Rv 777 $OPENSHIFT_REPO_DIR/app/logs
+  chmod -Rv 777 $OPENSHIFT_REPO_DIR/app/cache
+)
