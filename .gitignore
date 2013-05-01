@@ -5,6 +5,5 @@
 /build/
 /vendor/
 /bin/
-/composer.phar
 *.swp
 *.swo
